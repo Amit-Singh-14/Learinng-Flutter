@@ -13,10 +13,8 @@ class HomePage extends StatelessWidget {
         title: Center(child: Text(" it's app")),
       ), // top part ke liye h AppBar() ye widgit h
       body: Center(
-        child: Container(
-          child: Text(
-              "welcome $day $str "), // to add vaiable we use $varname or + krke bhi likh sakte
-        ),
+        child: Text(
+            "welcome $day $str "),
       ),
       drawer: Drawer(), // isse side mai home seeting wala option aata h
     );

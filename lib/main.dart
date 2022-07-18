@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
       // themedata den aparedga
       // primaryswatch ek color pallet mai design kr dta h
       //colors class h
-      theme: ThemeData(primarySwatch: Colors.deepPurple),
+      theme: ThemeData(primaryColor: Colors.cyan.shade100),
       darkTheme: ThemeData(
           brightness:
               Brightness.dark), // we have to give theme data tabhi work karega
@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
 
 //
 //      ny deafult route dena h
-      initialRoute: "/home",
+      initialRoute: "/",
 //     deaflut "/" ye hota h
 //
 
