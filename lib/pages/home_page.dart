@@ -2,21 +2,19 @@ import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
-  final int day = 2;
-  final String str = "singh";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       //
       appBar: AppBar(
-        title: Center(child: Text(" it's app")),
-      ), // top part ke liye h AppBar() ye widgit h
+        title: Center(child: Text(" First App")),
+      ), 
       body: Center(
         child: Text(
-            "welcome $day $str "),
+            "welcome to homepage "),
       ),
-      drawer: Drawer(), // isse side mai home seeting wala option aata h
+      drawer: Drawer(), 
     );
   }
 }
