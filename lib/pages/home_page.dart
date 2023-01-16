@@ -8,13 +8,13 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       //
       appBar: AppBar(
-        title: Center(child: Text(" First App")),
-      ), 
-      body: Center(
-        child: Text(
-            "welcome to homepage "),
+        title: Text(" First App"),
+        centerTitle: true,
       ),
-      drawer: Drawer(), 
+      body: Center(
+        child: Text("welcome to homepage "),
+      ),
+      drawer: Drawer(),
     );
   }
 }

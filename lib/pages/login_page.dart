@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utils/myroute.dart';
 
@@ -12,6 +14,8 @@ class _LoginPageState extends State<LoginPage> {
   String name = "";
   bool change = false;
 
+  // Globalkey matlab kahi bhi sue kr sakte h <FOrmstate> form ak kya state h
+  //
   final _formkey = GlobalKey<FormState>();
 
   moveTohere(BuildContext context) async {
@@ -21,7 +25,6 @@ class _LoginPageState extends State<LoginPage> {
       });
 
       await Future.delayed(Duration(seconds: 1));
-      // ignore: use_build_context_synchronously
       await Navigator.pushNamed(context, MyRoutes.homepage);
       setState(() {
         change = false;
@@ -46,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                   fit: BoxFit.cover,
                 ),
                 SizedBox(
-                  height: 30.0,
+                  height: 10.0,
                 ),
                 Text(
                   "welcome $name",
@@ -57,85 +60,73 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 SizedBox(
-                  height: 20.0,
+                  height: 10.0,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                      vertical: 16.0, horizontal: 42.0),
+                      vertical: 10.0, horizontal: 32.0),
                   child: Column(
                     children: [
                       TextFormField(
+                        onChanged: (value) {
+                          name = value;
+                          setState(() {});
+                        },
                         decoration: InputDecoration(
                           hintText: "enter user name ",
                           labelText: "UserName",
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "please enter the username";
-                          } else {
-                            return null;
+                            return "Username can not be empty";
                           }
-                        },
-                        onChanged: (value) {
-                          name = value;
-                          setState(() {});
+                          return null;
                         },
                       ),
                       TextFormField(
-                          obscureText: true,
-                          decoration: InputDecoration(
-                            hintText: "enter password ",
-                            labelText: "Password",
-                          ),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return "please enter the password";
-                            } else if (value.length <= 8) {
-                              return "password less";
-                            } else {
-                              return null;
-                            }
-                          }),
+                        decoration: InputDecoration(
+                          hintText: "enter password ",
+                          labelText: "Password",
+                        ),
+                        // isse password form mai convert ho jata h
+                        obscureText: true,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "password cannot be empty";
+                          } else if (value.length < 8) {
+                            return "password too sort";
+                          }
+                          return null;
+                        },
+                      ),
                       SizedBox(
                         height: 30.0,
                       ),
-                      InkWell(
-                        onTap: () => moveTohere(context),
-                        child: AnimatedContainer(
-                          duration: Duration(seconds: 1),
-                          height: 50,
-                          width: change ? 50 : 150,
-                          alignment: Alignment.center,
-
-                          // ignore: sort_child_properties_last
-                          child: change
-                              ? Icon(
-                                  Icons.done,
-                                  color: Colors.white,
-                                )
-                              : Text(
-                                  "login",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                          decoration: BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius:
-                                  BorderRadius.circular(change ? 50 : 8)),
+                      Material(
+                        color: Colors.deepPurple,
+                        borderRadius: BorderRadius.circular(change ? 50 : 8),
+                        child: InkWell(
+                          onTap: () => moveTohere(context),
+                          child: AnimatedContainer(
+                            duration: Duration(seconds: 1),
+                            height: 50,
+                            width: change ? 50 : 150,
+                            alignment: Alignment.center,
+                            child: change
+                                ? Icon(
+                                    Icons.done,
+                                    color: Colors.white,
+                                  )
+                                : Text(
+                                    "login",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                          ),
                         ),
                       )
-                      // ElevatedButton(
-                      //   style: TextButton.styleFrom(minimumSize: Size(120, 40)),
-                      //   child: Text(
-                      //     "login",
-                      //     style: TextStyle(fontSize: 18.0),
-                      //   ),
-                      //   onPressed: () {
-                      //     Navigator.pushNamed(context, MyRoutes.homepage);
-                      //   },
-                      // )
                     ],
                   ),
                 )
