@@ -1,10 +1,34 @@
+// ignore_for_file: use_key_in_widget_constructors
+
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_application_1/models/catalog.dart';
 import 'package:flutter_application_1/widgets/drawer.dart';
 import 'package:flutter_application_1/widgets/item_widget.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  loadData() async {
+    //read kr rahe in the form of string
+    var catalogJson = await rootBundle.loadString("asests/files/catalog.json");
+    // string form mai aya mai toh isko map mai convert kr rahe
+    var decodedData = jsonDecode(catalogJson);
+    // bass product wala cahiye
+    var productsData = decodedData["products"];
+    
+  }
 
   @override
   Widget build(BuildContext context) {
