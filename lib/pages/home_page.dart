@@ -21,19 +21,24 @@ class _HomePageState extends State<HomePage> {
   }
 
   loadData() async {
+    await Future.delayed(Duration(seconds: 2));
     //read kr rahe in the form of string
     var catalogJson = await rootBundle.loadString("asests/files/catalog.json");
     // string form mai aya mai toh isko map mai convert kr rahe
     var decodedData = jsonDecode(catalogJson);
     // bass product wala cahiye
     var productsData = decodedData["products"];
-    
+    // list bana raahe haai beacuse hum list ma show kr rahe h
+    CatalogModel.items = List.from(productsData)
+        .map<Item>((item) => Item.fromMap(item))
+        .toList();
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     //dumy list bana rahee h check krne ke lieye
-    final dumyList = List.generate(20, (index) => CatalogModel.items[0]);
+    // final dumyList = List.generate(20, (index) => CatalogModel.items[0]);
 
     return Scaffold(
       appBar: AppBar(
@@ -42,12 +47,14 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: ListView.builder(
+        child:  CatalogModel.items.isNotEmpty ? ListView.builder(
           //itemcount : Catalogwidget.items.length
-          itemCount: dumyList.length,
+          itemCount: CatalogModel.items.length,
           itemBuilder: (context, index) {
-            return ItemWidgets(item: dumyList[index]);
+            return ItemWidgets(item: CatalogModel.items[index]);
           },
+        ) : Center(
+          child: CircularProgressIndicator(),
         ),
       ),
       drawer: MyDrawer(),
