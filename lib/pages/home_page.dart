@@ -61,8 +61,22 @@ class _HomePageState extends State<HomePage> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
                       child: GridTile(
-                        header: Text(item.name),
-                        footer: Text(item.price.toString()),
+                        header: Container(
+                            padding: EdgeInsets.all(9),
+                            color: Colors.red,
+                            child: Text(
+                              item.name,
+                              style: TextStyle(color: Colors.white),
+                              textAlign: TextAlign.center,
+                            )),
+                        footer: Container(
+                            padding: EdgeInsets.all(9),
+                            color: Colors.black,
+                            child: Text(
+                              item.price.toString(),
+                              style: TextStyle(color: Colors.white),
+                              textAlign: TextAlign.center,
+                            )),
                         child: Image.network(item.image),
                       ));
                 },
