@@ -1,7 +1,6 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/models/catalog.dart';
@@ -47,15 +46,31 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child:  CatalogModel.items.isNotEmpty ? ListView.builder(
-          //itemcount : Catalogwidget.items.length
-          itemCount: CatalogModel.items.length,
-          itemBuilder: (context, index) {
-            return ItemWidgets(item: CatalogModel.items[index]);
-          },
-        ) : Center(
-          child: CircularProgressIndicator(),
-        ),
+        child: CatalogModel.items.isNotEmpty
+            ? GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+                ),
+                itemBuilder: (context, index) {
+                  final item = CatalogModel.items[index];
+                  return Card(
+                      // se proper border a jata h
+                      clipBehavior: Clip.antiAlias,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      child: GridTile(
+                        header: Text(item.name),
+                        footer: Text(item.price.toString()),
+                        child: Image.network(item.image),
+                      ));
+                },
+                itemCount: CatalogModel.items.length,
+              )
+            : Center(
+                child: CircularProgressIndicator(),
+              ),
       ),
       drawer: MyDrawer(),
     );
