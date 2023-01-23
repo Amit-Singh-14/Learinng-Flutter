@@ -4,10 +4,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/models/catalog.dart';
-// import 'package:flutter_application_1/widgets/drawer.dart';
-// import 'package:flutter_application_1/widgets/item_widget.dart';
 import 'package:flutter_application_1/widgets/theme.dart';
 import 'package:velocity_x/velocity_x.dart';
+import '../widgets/home_widgets/Catalog_Header.dart';
+import '../widgets/home_widgets/catalog_list.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -38,121 +38,24 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    //dumy list bana rahee h check krne ke lieye
-    // final dumyList = List.generate(20, (index) => CatalogModel.items[0]);
-
     return Scaffold(
         backgroundColor: MyTheme.creamColor,
         //batary jaha show hoti hai uske niche se start krta h
-
         body: SafeArea(
+          bottom: false,
           child: Container(
-            // padding: Vx.m32,
+            padding: Vx.m32,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CatalogHeader().p32(),
+                CatalogHeader(),
                 if (CatalogModel.items.isNotEmpty)
-                  CatalogList().pOnly(left: 12, right: 12).expand()
+                  CatalogList().pOnly(top: 10).expand()
                 else
-                  Center(child: CircularProgressIndicator())
-                      .box
-                      .make()
-                      .hFull(context)
-                      .expand()
+                  Center(child: CircularProgressIndicator()).expand()
               ],
             ),
           ),
         ));
-  }
-}
-
-class CatalogHeader extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        "Catalog App".text.xl5.bold.color(MyTheme.darkBlusidhColor).make(),
-        "Trending Products".text.xl2.make(),
-      ],
-    );
-  }
-}
-
-class CatalogList extends StatelessWidget {
-  const CatalogList({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: CatalogModel.items.length,
-      itemBuilder: (context, index) {
-        final catalog = CatalogModel.items[index];
-        return CatalogItem(
-          catalog: catalog,
-        );
-      },
-    );
-  }
-}
-
-class CatalogItem extends StatelessWidget {
-  final Item catalog;
-
-  const CatalogItem({super.key, required this.catalog});
-
-  @override
-  Widget build(BuildContext context) {
-    return VxBox(
-        child: Row(
-      children: [
-        CatalogImage(image: catalog.image),
-        Expanded(
-            child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            catalog.name.text.bold.lg.color(MyTheme.darkBlusidhColor).make(),
-            catalog.desc.text.textStyle(context.captionStyle).make(),
-            // sizebox ka alternative
-            10.heightBox,
-            ButtonBar(
-              alignment: MainAxisAlignment.spaceBetween,
-              buttonPadding: Vx.m0,
-              children: [
-                "\$${catalog.price}".text.bold.xl.make(),
-                ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(MyTheme.darkBlusidhColor),
-                      shape: MaterialStateProperty.all(StadiumBorder())),
-                  onPressed: () {},
-                  child: "BUY".text.make(),
-                )
-              ],
-            ).pOnly(right: 8.0)
-          ],
-        ))
-      ],
-    )).white.rounded.square(150).make().py16();
-  }
-}
-
-class CatalogImage extends StatelessWidget {
-  final String image;
-  const CatalogImage({super.key, required this.image});
-
-  @override
-  Widget build(BuildContext context) {
-    return Image.network(image)
-        .box
-        .rounded
-        .p8
-        .color(MyTheme.creamColor)
-        .make()
-        .p16()
-        .w40(context);
   }
 }
