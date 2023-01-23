@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utils/myroute.dart';
+import 'package:flutter_application_1/widgets/theme.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -24,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
         change = true;
       });
 
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(Duration(milliseconds: 700));
       await Navigator.pushNamed(context, MyRoutes.homepage);
       setState(() {
         change = false;
@@ -52,11 +53,11 @@ class _LoginPageState extends State<LoginPage> {
                   height: 10.0,
                 ),
                 Text(
-                  "welcome $name",
+                  "welcome",
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
-                    color: Colors.blue,
+                    color: MyTheme.darkBlusidhColor,
                   ),
                 ),
                 SizedBox(
@@ -70,7 +71,6 @@ class _LoginPageState extends State<LoginPage> {
                       TextFormField(
                         onChanged: (value) {
                           name = value;
-                          setState(() {});
                         },
                         decoration: InputDecoration(
                           hintText: "enter user name ",
@@ -103,12 +103,12 @@ class _LoginPageState extends State<LoginPage> {
                         height: 30.0,
                       ),
                       Material(
-                        color: Colors.deepPurple,
+                        color: MyTheme.darkBlusidhColor,
                         borderRadius: BorderRadius.circular(change ? 50 : 8),
                         child: InkWell(
                           onTap: () => moveTohere(context),
                           child: AnimatedContainer(
-                            duration: Duration(seconds: 1),
+                            duration: Duration(milliseconds: 400),
                             height: 50,
                             width: change ? 50 : 150,
                             alignment: Alignment.center,
