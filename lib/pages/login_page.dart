@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utils/myroute.dart';
 import 'package:flutter_application_1/widgets/theme.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -12,7 +13,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String name = "";
   bool change = false;
 
   // Globalkey matlab kahi bhi sue kr sakte h <FOrmstate> form ak kya state h
@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Material(
-        color: Colors.white,
+        color: context.canvasColor,
         child: SingleChildScrollView(
           child: Form(
             key: _formkey,
@@ -57,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
-                    color: MyTheme.darkBlusidhColor,
+                    color: context.backgroundColor,
                   ),
                 ),
                 SizedBox(
@@ -69,9 +69,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     children: [
                       TextFormField(
-                        onChanged: (value) {
-                          name = value;
-                        },
+                        onChanged: (value) {},
                         decoration: InputDecoration(
                           hintText: "enter user name ",
                           labelText: "UserName",
@@ -103,7 +101,8 @@ class _LoginPageState extends State<LoginPage> {
                         height: 30.0,
                       ),
                       Material(
-                        color: MyTheme.darkBlusidhColor,
+                        color: context
+                            .theme.floatingActionButtonTheme.backgroundColor,
                         borderRadius: BorderRadius.circular(change ? 50 : 8),
                         child: InkWell(
                           onTap: () => moveTohere(context),

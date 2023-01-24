@@ -11,10 +11,12 @@ class HomeDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      backgroundColor: MyTheme.creamColor,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+      ),
+      backgroundColor: context.canvasColor,
       bottomNavigationBar: Container(
-        color: Colors.white,
+        color: context.cardColor,
         child: ButtonBar(
           alignment: MainAxisAlignment.spaceBetween,
           buttonPadding: Vx.m0,
@@ -22,14 +24,14 @@ class HomeDetailPage extends StatelessWidget {
             "\$${catalog.price}".text.bold.red800.xl4.make(),
             ElevatedButton(
               style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all(MyTheme.darkBlusidhColor),
+                  backgroundColor: MaterialStateProperty.all(
+                      context.theme.floatingActionButtonTheme.backgroundColor),
                   shape: MaterialStateProperty.all(StadiumBorder())),
               onPressed: () {},
-              child: "BUY".text.xl.make(),
-            ).wh(100, 50)
+              child: "Add To Cart".text.xl.make(),
+            ).wh(130, 50)
           ],
-        ).p32(),
+        ).p20(),
       ),
       body: SafeArea(
         bottom: false,
@@ -45,15 +47,21 @@ class HomeDetailPage extends StatelessWidget {
               arcType: VxArcType.CONVEY,
               edge: VxEdge.TOP,
               child: Container(
-                color: Colors.white,
+                color: context.cardColor,
                 width: context.screenWidth,
                 child: Column(
                   children: [
                     catalog.name.text.bold.xl4
-                        .color(MyTheme.darkBlusidhColor)
+                        .color(context.backgroundColor)
                         .make(),
                     catalog.desc.text.textStyle(context.captionStyle).xl.make(),
-                    10.heightBox
+                    10.heightBox,
+                    "Dolor sea takimata ipsum sea eirmod aliquyam est. Eos ipsum voluptua eirmod elitr, no dolor dolor amet eirmod dolor labore dolores magna. Amet vero vero vero kasd, dolore sea sed sit invidunt nonumy est sit clita."
+                        .text
+                        .textStyle(context.captionStyle)
+                        .make()
+                        .p16()
+                        .expand()
                   ],
                 ).py64(),
               ),

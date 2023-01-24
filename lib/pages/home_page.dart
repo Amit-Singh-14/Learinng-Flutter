@@ -1,9 +1,11 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/models/catalog.dart';
+import 'package:flutter_application_1/utils/myroute.dart';
 import 'package:flutter_application_1/widgets/theme.dart';
 import 'package:velocity_x/velocity_x.dart';
 import '../widgets/home_widgets/Catalog_Header.dart';
@@ -39,18 +41,27 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: MyTheme.creamColor,
+        backgroundColor: context.canvasColor,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => Navigator.pushNamed(context, MyRoutes.cartRoutes),
+          // backgroundColor: context.accentColor,
+          backgroundColor:
+              context.theme.floatingActionButtonTheme.backgroundColor,
+          foregroundColor: Colors.white,
+          child: Icon(CupertinoIcons.cart),
+        ).w15(context),
+
         //batary jaha show hoti hai uske niche se start krta h
         body: SafeArea(
           bottom: false,
           child: Container(
-            padding: Vx.m32,
+            padding: Vx.m24,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CatalogHeader(),
                 if (CatalogModel.items.isNotEmpty)
-                  CatalogList().pOnly(top: 10).expand()
+                  CatalogList().pOnly(top: 5, bottom: 30).expand()
                 else
                   Center(child: CircularProgressIndicator()).expand()
               ],
