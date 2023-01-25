@@ -7,6 +7,7 @@ class MyTheme {
       primarySwatch: Colors.deepPurple,
       cardColor: Colors.white,
       canvasColor: creamColor,
+      accentColor: darkBlusidhColor,
       floatingActionButtonTheme:
           FloatingActionButtonThemeData(backgroundColor: darkBlusidhColor),
       backgroundColor: darkBlusidhColor,
@@ -28,6 +29,7 @@ class MyTheme {
       fontFamily: GoogleFonts.poppins().fontFamily,
       cardColor: Colors.black,
       canvasColor: darkcreamColor,
+      accentColor: lightBlusidhColor,
       floatingActionButtonTheme:
           FloatingActionButtonThemeData(backgroundColor: lightBlusidhColor),
       backgroundColor: Colors.white,
