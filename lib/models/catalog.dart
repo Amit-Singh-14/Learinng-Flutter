@@ -3,10 +3,10 @@ class CatalogModel {
   static List<Item> items = [];
 
   //get Item by ID;
-  static Item getById(int id) => items.firstWhere((element) => element.id == id);
+   Item getById(int id) => items.firstWhere((element) => element.id == id);
 
   // get item by postion
-  static Item getByPosition(int pos) => items[pos];
+   Item getByPosition(int pos) => items[pos];
 }
 
 // model h ki kaise data store hoga
