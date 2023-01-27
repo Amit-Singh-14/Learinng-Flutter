@@ -15,7 +15,8 @@ class AddtoCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    VxState.watch(context, on: [AddMutation]);
+    //state refresh krne ke liye
+    VxState.watch(context, on: [AddMutation, RemoveMutation]);
 
     final CartModel cart = (VxState.store as Mystore).cart;
 
@@ -29,7 +30,6 @@ class AddtoCart extends StatelessWidget {
         if (!isInCart) {
           AddMutation(catalog);
         }
-
       },
       child: isInCart ? Icon(Icons.done) : Icon(CupertinoIcons.cart_badge_plus),
     );
